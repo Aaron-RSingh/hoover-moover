@@ -35,7 +35,7 @@ let sortData = function(string) {
   let numericalRoombaStartPosition =
     roombaStartPosition.x + 1 + roomSize.y * roombaStartPosition.y;
   console.log({ numericalRoombaStartPosition });
-  convertDirtToNumbers(dirtPiles);
+  convertDirtToNumbers(dirtPiles, roomSize);
 
   // function to call roomba movemtent
   directionalMovement(directions, numericalRoombaStartPosition, roomSize);
@@ -44,9 +44,9 @@ let sortData = function(string) {
 // function to identify numeric value for dirt tiles
 
 const dirtArray = [];
-function convertDirtToNumbers(data) {
+function convertDirtToNumbers(data, roomSize) {
   data.map(dirtPile => {
-    const dirtValue = dirtPile.x + 1 + 5 * dirtPile.y;
+    const dirtValue = dirtPile.x + 1 + roomSize.x * dirtPile.y;
     dirtArray.push(dirtValue);
   });
   console.log({ dirtArray });
@@ -55,25 +55,45 @@ function convertDirtToNumbers(data) {
 // function to describe direcitonal movement
 
 function directionalMovement(directions, startpoint, roomSize) {
+  // counter for piles of dirt cleaned up
   let cleanupCount = 0;
+
+  // converting string to array for directions to iterate through
   let directionArray = [...directions];
+
+  // allowing roomba position to change through setting to new variable
   let roombaCurrentPosition = startpoint;
+
+  // iterating through each direction to conduct different movements providing boundary conditions are met
   directionArray.forEach(direction => {
+    // move North 1 tile, only when the value of the current roomba position is smaller than
+    // the top row of the grid
     if (
       direction == "N" &&
       roombaCurrentPosition <= roomSize.x * (roomSize.y - 1)
     ) {
       roombaCurrentPosition += 5;
-    } else if (direction == "S" && roombaCurrentPosition > roomSize.x) {
+    }
+    // move South 1 tile, only when the value of the current roomba position is greater than
+    // the bottom row of the grid
+    else if (direction == "S" && roombaCurrentPosition > roomSize.x) {
       roombaCurrentPosition -= 5;
-    } else if (direction == "E" && roombaCurrentPosition % roomSize.x !== 0) {
+    }
+    // move East 1 tile, only when the value of the current roomba position is not a multiple of the max width
+    // of the room
+    else if (direction == "E" && roombaCurrentPosition % roomSize.x !== 0) {
       roombaCurrentPosition += 1;
-    } else if (
+    }
+    // move West 1 tile, only when the value of the current roomba position is not one higher than a multiple of
+    // the max width of the room
+    else if (
       direction == "W" &&
       (roombaCurrentPosition - 1) % roomSize.x !== 0
     ) {
       roombaCurrentPosition -= 1;
     }
+    // after every movement, check whether roomba is on same tile as dirt pile, if it is, remove dirt from
+    // the dirt array and continue iterating through directions
     if (dirtArray.includes(roombaCurrentPosition)) {
       cleanupCount += 1;
       for (var i = 0; i < dirtArray.length; i++) {
@@ -82,18 +102,27 @@ function directionalMovement(directions, startpoint, roomSize) {
         }
       }
     }
+    console.log(roombaCurrentPosition);
   });
 
   // converting final position to co-ordinates
 
-  let X = (roombaCurrentPosition % roomSize.x) - 1;
-  let Y = (roombaCurrentPosition - (X + 1)) / roomSize.x;
+  // evaluating x to account for 0 co-ordinate
+  let modX = roombaCurrentPosition % roomSize.x;
+
+  let X = modX === 0 ? modX + 4 : modX - 1;
+  let Y = (roombaCurrentPosition - (X + 1))/roomSize.x
+//   let Y =
+//     modX === 0
+//       ? (roombaCurrentPosition - modX) / roomSize.x
+//       : modX - 1;
+  //   let Y = (roombaCurrentPosition - xforY) / roomSize.x;
   let roombaFinalPosition = "(X : " + X + ", Y : " + Y + ")";
 
   // console log to check final results are correct
   console.log({ roombaFinalPosition, cleanupCount });
 
-  // appending results to DOM
+  // appending results of both the final position and the number of dirt piles cleaned to DOM
 
   const resultsDiv = document.querySelector("#results");
 
