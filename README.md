@@ -40,11 +40,11 @@ I broke down the problem by giving the grid a numberline property such that I co
 Where 5 = the width dimension of the room.
 As well as the additional "+ 1" to allow myself to start the first tile to have the value of 1.
 
-Eg. For (0,0) => 0 + (5*0) + 1 = 1
+Eg. For (0,0) => 0 + (5\*0) + 1 = 1
 
-Eg. For (3,2) => 3 + (5*2) + 1 = 14
+Eg. For (3,2) => 3 + (5\*2) + 1 = 14
 
-Eg. For (4,4) => 4 + (5*4) + 1 = 25
+Eg. For (4,4) => 4 + (5\*4) + 1 = 25
 
 etc.
 
