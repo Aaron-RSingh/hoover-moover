@@ -14,10 +14,15 @@ Well, fortunately, I have created a few lines of code to let us know how many pa
 To give a better understanding of the data, I will break down the example data which is as follows:
 
 5 5
+
 1 2
+
 1 0
+
 2 2
+
 2 3
+
 NNESEESWNWW
 
 In this example:
@@ -36,8 +41,11 @@ Where 5 = the width dimension of the room.
 As well as the additional "+ 1" to allow myself to start the first tile to have the value of 1.
 
 Eg. For (0,0) => 0 + (5*0) + 1 = 1
+
 Eg. For (3,2) => 3 + (5*2) + 1 = 14
+
 Eg. For (4,4) => 4 + (5*4) + 1 = 25
+
 etc.
 
 To conduct more tests, simply change the information in the "input.txt" file and either type "open index.html" in your terminal, or right click the index.html file and choose option "open with live server" or your editors equivalent option.
