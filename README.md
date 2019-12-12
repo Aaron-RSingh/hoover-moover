@@ -35,7 +35,7 @@ NOTE: It should be noted that the co-ordinates respond the the bottom left corne
 
 I broke down the problem by giving the grid a numberline property such that I could transform any co-ordinate into a singular numerical value. For the given example, the algorithm was as follows:
 
-(x, y) => x + (5*y) + 1 = tile value
+(x, y) => x + (5*y) + 1 = co-ordinate value
 
 Where 5 = the width dimension of the room.
 As well as the additional "+ 1" to allow myself to start the first tile to have the value of 1.
