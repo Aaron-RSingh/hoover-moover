@@ -111,12 +111,7 @@ function directionalMovement(directions, startpoint, roomSize) {
   let modX = roombaCurrentPosition % roomSize.x;
 
   let X = modX === 0 ? modX + 4 : modX - 1;
-  let Y = (roombaCurrentPosition - (X + 1))/roomSize.x
-//   let Y =
-//     modX === 0
-//       ? (roombaCurrentPosition - modX) / roomSize.x
-//       : modX - 1;
-  //   let Y = (roombaCurrentPosition - xforY) / roomSize.x;
+  let Y = (roombaCurrentPosition - (X + 1)) / roomSize.x;
   let roombaFinalPosition = "(X : " + X + ", Y : " + Y + ")";
 
   // console log to check final results are correct
