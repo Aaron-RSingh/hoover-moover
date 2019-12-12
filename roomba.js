@@ -33,7 +33,7 @@ let sortData = function(string) {
   // setting numeric value to roomba start position
 
   let numericalRoombaStartPosition =
-    roombaStartPosition.x + 5 * roombaStartPosition.y;
+    roombaStartPosition.x + 1 + roomSize.y * roombaStartPosition.y;
   console.log({ numericalRoombaStartPosition });
   convertDirtToNumbers(dirtPiles);
 
@@ -76,9 +76,35 @@ function directionalMovement(directions, startpoint, roomSize) {
     }
     if (dirtArray.includes(roombaCurrentPosition)) {
       cleanupCount += 1;
+      for (var i = 0; i < dirtArray.length; i++) {
+        if (dirtArray[i] === roombaCurrentPosition) {
+          dirtArray.splice(i, 1);
+        }
+      }
     }
-    console.log({ roombaCurrentPosition, roomSize, direction });
   });
-  let roombaFinalPosition = roombaCurrentPosition;
+
+  // converting final position to co-ordinates
+
+  let X = (roombaCurrentPosition % roomSize.x) - 1;
+  let Y = (roombaCurrentPosition - (X + 1)) / roomSize.x;
+  let roombaFinalPosition = "(X : " + X + ", Y : " + Y + ")";
+
+  // console log to check final results are correct
   console.log({ roombaFinalPosition, cleanupCount });
+
+  // appending results to DOM
+
+  const resultsDiv = document.querySelector("#results");
+
+  const finalPositionP = document.createElement("p");
+  finalPositionP.innerText = "Roomba final position: " + roombaFinalPosition;
+  resultsDiv.append(finalPositionP);
+
+  const cleanedElements = document.createElement("p");
+  cleanedElements.innerText =
+    "Your Roomba has cleaned " + cleanupCount + " pieces of dirt!";
+  resultsDiv.append(cleanedElements);
+
+  // c'est finit
 }
