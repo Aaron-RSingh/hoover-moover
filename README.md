@@ -1,5 +1,10 @@
 # hoover-moover
 
+Instructions:
+ - clone repository to local computer
+ - open repository in your editor
+ - using the Live Server extension by Ritwick Dey, open index.html with the Live Server and continue on through the README.md!
+
 Hello World!
 
 Program to make a roomba clean a room with no doors or windows, so I suppose it's a Schrödinger's cat situation, who knows if the room is actually clean?!?
