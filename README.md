@@ -3,7 +3,7 @@
 Instructions:
  - clone repository to local computer
  - open repository in your editor
- - Using VSCode and the Live Server extension by Ritwick Dey, open index.html with the Live Server option and continue on through the README.md!
+ - Using VSCode and the Live Server extension by Ritwick Dey, right click the index.html tab and select open index.html with the Live Server option and continue on through the README.md!
 
 Hello World!
 
